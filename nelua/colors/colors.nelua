@@ -1,0 +1,30 @@
+require 'io'
+require 'string'
+
+local FOREGROUND <comptime> = 38
+local BACKGROUND <comptime> = 48
+
+local function color_range(first: integer, last: integer, anyground: integer)
+  local resetdefault: string = "\x1b[0m"
+  local resetwithspace: string = "\x1b[0m "
+
+  local resetoutput = resetwithspace
+  for color = first, last do
+    if color % 16 == 0 then
+      io.printf("\n")
+    end
+    if color == last then
+      resetoutput = resetdefault
+    end
+
+    io.printf(string.format("\x1b[%d;5;%dm%3d%s", anyground, color, color, resetoutput))
+  end
+end
+
+io.printf("\x1b[1;39m0 to 255 Colors (FOREGROUND)\x1b[22;0m\n")
+color_range(0, 255, FOREGROUND)
+io.printf("\n\n")
+
+io.printf("\x1b[1;39m0 to 255 Colors (BACKGROUND)\x1b[22;0m\n")
+color_range(0, 255, BACKGROUND)
+io.printf("\n\n")
