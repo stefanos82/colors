@@ -17,14 +17,14 @@ color_range() {
             printf "\n"
         fi
 
-        printf "\x1b[%d;5;%dm%3d\x1b[0m " "$anyground" "$color" "$color"
+        printf "\033[%d;5;%dm%3d\033[0m " "$anyground" "$color" "$color"
     done
 }
 
-printf "\x1b[1;39m0 to 255 Colors (FOREGROUND)\x1b[22;0m\n"
+printf "\033[1;39m0 to 255 Colors (FOREGROUND)\033[22;0m\n"
 color_range 0 255 $FOREGROUND
 printf "\n\n"
 
-printf "\x1b[1;39m0 to 255 Colors (BACKGROUND)\x1b[22;0m\n"
+printf "\033[1;39m0 to 255 Colors (BACKGROUND)\033[22;0m\n"
 color_range 0 255 $BACKGROUND
 printf "\n\n"
