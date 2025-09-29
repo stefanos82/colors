@@ -24,10 +24,10 @@ fn int main(String[] args)
 {
     io::printn("\x1b[1;39m0 to 255 Colors (FOREGROUND)\x1b[22;0m");
     color_range(0, 255, FOREGROUND);
-    io::printfn("\n");
+    io::printn("\n");
 
     io::printn("\x1b[1;39m0 to 255 Colors (BACKGROUND)\x1b[22;0m");
     color_range(0, 255, BACKGROUND);
-    io::printfn("\n");
+    io::printn("\n");
     return 0;
 }
