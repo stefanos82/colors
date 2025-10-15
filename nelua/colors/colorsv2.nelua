@@ -1,5 +1,4 @@
-require 'io'
-require 'os'
+require 'C.stdio'
 
 local FOREGROUND <comptime> = 38
 local BACKGROUND <comptime> = 48
@@ -13,21 +12,21 @@ local function color_range(first: integer, last: integer, anyground: integer)
 
   for color=first,last do
     if color % 16 == 0 then
-      io.writef("\n")
+      C.puts("")
     end
 
-    io.writef("\x1b[%d;5;%dm%3d%s", anyground, color, color, resetoutput)
+    C.printf("\x1b[%ld;5;%ldm%3ld%s", anyground, color, color, resetoutput)
   end
 end
 
 do
-  io.writef("\x1b[1;39m0 to %d Colors (FOREGROUND)\x1b[22;0m\n", CLR_END)
+  C.printf("\x1b[1;39m0 to %d Colors (FOREGROUND)\x1b[22;0m\n", CLR_END)
   color_range(CLR_BEGIN, CLR_END, FOREGROUND)
-  print("\n")
+  C.puts("\n")
 end
 
 do
-  io.writef("\x1b[1;39m0 to %d Colors (BACKGROUND)\x1b[22;0m\n", CLR_END)
+  C.printf("\x1b[1;39m0 to %d Colors (BACKGROUND)\x1b[22;0m\n", CLR_END)
   color_range(CLR_BEGIN, CLR_END, BACKGROUND)
-  print("\n")
+  C.puts("\n")
 end
