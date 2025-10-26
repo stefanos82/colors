@@ -11,7 +11,8 @@ sub color_range {
     my $resetoutput = $resetwithspace;
 
     for (my $color = $start; $color <= $end; $color++) {
-        print "\n" if ($color % 16 == 0);
+        # Add a newline every 16 columns with the help of `say` function.
+        say if ($color % 16 == 0);
 
         if ($color == $end) {
             $resetoutput = $resetdefault;
