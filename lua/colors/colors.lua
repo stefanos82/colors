@@ -1,5 +1,7 @@
 local FOREGROUND = 38
 local BACKGROUND = 48
+local INITIAL = 0
+local FINAL = 255
 
 local function color_range(first, last, anyground)
   local resetdefault = "\x1b[0m"
@@ -18,10 +20,10 @@ local function color_range(first, last, anyground)
   end
 end
 
-io.write("\x1b[1;39m0 to 255 Colors (FOREGROUND)\x1b[22;0m\n")
-color_range(0, 255, FOREGROUND)
+io.write(string.format("\x1b[1;39m%d to %d Colors (FOREGROUND)\x1b[22;0m\n", INITIAL, FINAL))
+color_range(INITIAL, FINAL, FOREGROUND)
 io.write("\n\n")
 
-io.write("\x1b[1;39m0 to 255 Colors (BACKGROUND)\x1b[22;0m\n")
-color_range(0, 255, BACKGROUND)
+io.write(string.format("\x1b[1;39m%d to %d Colors (BACKGROUND)\x1b[22;0m\n", INITIAL, FINAL))
+color_range(INITIAL, FINAL, BACKGROUND)
 io.write("\n\n")
