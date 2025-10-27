@@ -1,6 +1,7 @@
 const FOREGROUND = 38;
 const BACKGROUND = 48;
-
+const INITIAL = 0;
+const FINAL = 255;
 
 function color_range(start, end, anyground) {
 
@@ -22,10 +23,10 @@ function color_range(start, end, anyground) {
     }
 }
 
-console.log("\x1b[1;39m0 to 255 Colors (FOREGROUND)\x1b[22;0m");
-color_range(0, 255, FOREGROUND);
+process.stdout.write(`\x1b[1;39m${INITIAL} to ${FINAL} Colors (FOREGROUND)\x1b[22;0m\n`);
+color_range(INITIAL, FINAL, FOREGROUND);
 console.log("\n");
 
-console.log("\x1b[1;39m0 to 255 Colors (BACKGROUND)\x1b[22;0m");
-color_range(0, 255, BACKGROUND);
+process.stdout.write(`\x1b[1;39m${INITIAL} to ${FINAL} Colors (BACKGROUND)\x1b[22;0m\n`);
+color_range(INITIAL, FINAL, BACKGROUND);
 console.log("\n");
