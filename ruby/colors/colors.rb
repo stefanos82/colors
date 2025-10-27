@@ -1,5 +1,7 @@
 FOREGROUND = 38
 BACKGROUND = 48
+INITIAL = 0
+FINAL = 255
 
 def color_range(start, daEnd, anyground)
   resetdefault = "\x1b[0m"
@@ -20,10 +22,10 @@ def color_range(start, daEnd, anyground)
   end
 end
 
-puts "\x1b[1;39m0 to 255 Colors (FOREGROUND)\x1b[22;0m"
-color_range(0, 255, FOREGROUND)
+puts "\x1b[1;39m#{INITIAL} to #{FINAL} Colors (FOREGROUND)\x1b[22;0m"
+color_range(INITIAL, FINAL, FOREGROUND)
 print "\n\n"
 
-puts "\x1b[1;39m0 to 255 Colors (BACKGROUND)\x1b[22;0m"
-color_range(0, 255, BACKGROUND)
+puts "\x1b[1;39m#{INITIAL} to #{FINAL} Colors (BACKGROUND)\x1b[22;0m"
+color_range(INITIAL, FINAL, BACKGROUND)
 print "\n\n"
