@@ -1,5 +1,7 @@
 const FOREGROUND: u64 = 38;
 const BACKGROUND: u64 = 48;
+const INITIAL: u64 = 0;
+const FINAL: u64 = 255;
 
 fn color_range(start: u64, end: u64, anyground: u64) {
     let resetdefault = "\x1b[0m";
@@ -21,11 +23,11 @@ fn color_range(start: u64, end: u64, anyground: u64) {
 }
 
 fn main() {
-    println!("\x1b[1;39m0 to 255 Colors (FOREGROUND)\x1b[22;0m");
-    color_range(0, 255, FOREGROUND);
+    println!("\x1b[1;39m{INITIAL} to {FINAL} Colors (FOREGROUND)\x1b[22;0m");
+    color_range(INITIAL, FINAL, FOREGROUND);
     println!("\n");
 
-    println!("\x1b[1;39m0 to 255 Colors (BACKGROUND)\x1b[22;0m");
-    color_range(0, 255, BACKGROUND);
+    println!("\x1b[1;39m{INITIAL} to {FINAL} Colors (BACKGROUND)\x1b[22;0m");
+    color_range(INITIAL, FINAL, BACKGROUND);
     println!("\n");
 }
