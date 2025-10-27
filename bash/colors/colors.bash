@@ -4,6 +4,8 @@ set -e
 
 FOREGROUND=38
 BACKGROUND=48
+INITIAL=0
+FINAL=255
 
 color_range() {
     local start=$1
@@ -21,10 +23,10 @@ color_range() {
     done
 }
 
-printf "\033[1;39m0 to 255 Colors (FOREGROUND)\033[22;0m\n"
-color_range 0 255 $FOREGROUND
+printf "\033[1;39m%d to %d Colors (FOREGROUND)\033[22;0m\n" "$INITIAL" "$FINAL"
+color_range $INITIAL $FINAL $FOREGROUND
 printf "\n\n"
 
-printf "\033[1;39m0 to 255 Colors (BACKGROUND)\033[22;0m\n"
-color_range 0 255 $BACKGROUND
+printf "\033[1;39m%d to %d Colors (BACKGROUND)\033[22;0m\n" "$INITIAL" "$FINAL"
+color_range $INITIAL $FINAL $BACKGROUND
 printf "\n\n"
