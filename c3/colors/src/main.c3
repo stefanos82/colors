@@ -3,6 +3,8 @@ import std::io;
 
 const int FOREGROUND = 38;
 const int BACKGROUND = 48;
+const int INITIAL = 0;
+const int FINAL = 255;
 
 fn void color_range(int start, int end, int anyground)
 {
@@ -22,11 +24,11 @@ fn void color_range(int start, int end, int anyground)
 
 fn int main(String[] args)
 {
-    io::printn("\x1b[1;39m0 to 255 Colors (FOREGROUND)\x1b[22;0m");
-    color_range(0, 255, FOREGROUND);
+    io::printfn("\x1b[1;39m%d to %d Colors (FOREGROUND)\x1b[22;0m", INITIAL, FINAL);
+    color_range(INITIAL, FINAL, FOREGROUND);
     io::printn("\n");
 
-    io::printn("\x1b[1;39m0 to 255 Colors (BACKGROUND)\x1b[22;0m");
+    io::printfn("\x1b[1;39m%d to %d Colors (BACKGROUND)\x1b[22;0m", INITIAL, FINAL);
     color_range(0, 255, BACKGROUND);
     io::printn("\n");
     return 0;
