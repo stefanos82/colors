@@ -2,6 +2,8 @@
 
 const int FOREGROUND = 38;
 const int BACKGROUND = 48;
+const int INITIAL = 0;
+const int FINAL = 255;
 
 void color_range(int start, int end, int anyground)
 {
@@ -25,12 +27,12 @@ void color_range(int start, int end, int anyground)
 
 int main(void)
 {
-    puts("\x1b[1;39m0 to 255 Colors (FOREGROUND)\x1b[22;0m");
-    color_range(0, 255, FOREGROUND);
+    printf("\x1b[1;39m%d to %d Colors (FOREGROUND)\x1b[22;0m\n", INITIAL, FINAL);
+    color_range(INITIAL, FINAL, FOREGROUND);
     puts("\n");
 
-    puts("\x1b[1;39m0 to 255 Colors (BACKGROUND)\x1b[22;0m");
-    color_range(0, 255, BACKGROUND);
+    printf("\x1b[1;39m%d to %d Colors (BACKGROUND)\x1b[22;0m\n", INITIAL, FINAL);
+    color_range(INITIAL, FINAL, BACKGROUND);
     puts("\n");
 
     return 0;
