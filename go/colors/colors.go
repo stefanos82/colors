@@ -5,6 +5,8 @@ import "fmt"
 const (
 	FOREGROUND = 38
 	BACKGROUND = 48
+	INITIAL    = 0
+	FINAL      = 255
 )
 
 func ColorRange(start int, end int, anyground int) {
@@ -26,11 +28,11 @@ func ColorRange(start int, end int, anyground int) {
 }
 
 func main() {
-	fmt.Println("\x1b[1;39m0 to 255 Colors (FOREGROUND)\x1b[22;0m")
-	ColorRange(0, 255, FOREGROUND)
+	fmt.Printf("\x1b[1;39m%d to %d Colors (FOREGROUND)\x1b[22;0m\n", INITIAL, FINAL)
+	ColorRange(INITIAL, FINAL, FOREGROUND)
 	fmt.Println("\n")
 
-	fmt.Println("\x1b[1;39m0 to 255 Colors (BACKGROUND)\x1b[22;0m")
-	ColorRange(0, 255, BACKGROUND)
+	fmt.Printf("\x1b[1;39m%d to %d Colors (BACKGROUND)\x1b[22;0m\n", INITIAL, FINAL)
+	ColorRange(INITIAL, FINAL, BACKGROUND)
 	fmt.Println("\n")
 }
