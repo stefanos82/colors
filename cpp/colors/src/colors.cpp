@@ -2,6 +2,8 @@
 
 constexpr int FOREGROUND = 38;
 constexpr int BACKGROUND = 48;
+constexpr int INITIAL = 0;
+constexpr int FINAL = 255;
 
 void color_range(int start, int end, int anyground)
 {
@@ -25,12 +27,12 @@ void color_range(int start, int end, int anyground)
 
 int main()
 {
-    std::printf("\x1b[1;39m0 to 255 Colors (FOREGROUND)\x1b[22;0m\n");
-    color_range(0, 255, FOREGROUND);
+    std::printf("\x1b[1;39m%d to %d Colors (FOREGROUND)\x1b[22;0m\n", INITIAL, FINAL);
+    color_range(INITIAL, FINAL, FOREGROUND);
     std::puts("\n");
 
-    std::printf("\x1b[1;39m0 to 255 Colors (BACKGROUND)\x1b[22;0m\n");
-    color_range(0, 255, BACKGROUND);
+    std::printf("\x1b[1;39m%d to %d Colors (BACKGROUND)\x1b[22;0m\n", INITIAL, FINAL);
+    color_range(INITIAL, FINAL, BACKGROUND);
     std::puts("\n");
 }
 

@@ -1,6 +1,9 @@
-CCACHE := $(shell basename $(shell command -v ccache 2>/dev/null))
-
 COMPILER := g++
+FILE_EXT := cpp
+
+include flags.mk
+
+CCACHE := $(shell basename $(shell command -v ccache 2>/dev/null))
 
 ifdef CCACHE
 CC = $(CCACHE) $(COMPILER)
@@ -11,15 +14,13 @@ endif
 SRC := src
 INC = -I $(SRC)
 
-include flags.mk
-
 OBJDIR := obj
 BINDIR := bin
 
 TARGET = $(BINDIR)/$(notdir $(basename $(shell pwd)))
 
-SOURCES = $(wildcard $(SRC)/*.cpp)
-TMPOBJ = $(patsubst %.cpp, %.o, $(notdir $(SOURCES)))
+SOURCES = $(wildcard $(SRC)/*.$(FILE_EXT))
+TMPOBJ = $(patsubst %.$(FILE_EXT), %.o, $(notdir $(SOURCES)))
 OBJECTS = $(addprefix $(OBJDIR)/, $(TMPOBJ))
 
 CPUS ?= $(shell nproc)
@@ -31,20 +32,41 @@ PLUSFLAGS ?=
 PLUSLDFLAGS ?=
 
 $(TARGET): $(OBJECTS)
+ifneq ($(PLUSLDFLAGS),)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS) $(PLUSLDFLAGS)
-
+else
+	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
+endif
 makedirs:
 	@mkdir -p $(OBJDIR) $(BINDIR)
 
-$(OBJECTS): $(OBJDIR)/%.o: $(SRC)/%.cpp
+$(OBJECTS): $(OBJDIR)/%.o: $(SRC)/%.$(FILE_EXT)
+ifneq ($(PLUSFLAGS),)
 	$(CC) $(FLAGS) $(PLUSFLAGS) $(INC) -c $< -o $@
+else
+	$(CC) $(FLAGS) $(INC) -c $< -o $@
+endif
 
 ifeq ($(COMPILER),g++)
-debug: FLAGS += -g -Og -fno-omit-frame-pointer -D_GLIBCXX_DEBUG $(SANITIZER) $(ANALYZER)
+debug: FLAGS += -g -Og
+debug: FLAGS += -fno-omit-frame-pointer
+debug: FLAGS += -D_GLIBCXX_DEBUG
+debug: FLAGS += -DDEBUG
 else
-debug: FLAGS += -g -Og -fno-omit-frame-pointer $(SANITIZER) $(ANALYZER)
+debug: FLAGS += -g -Og -fno-omit-frame-pointer
+debug: FLAGS += -DDEBUG
 endif
-debug: LDFLAGS += $(SANITIZER)
+
+SANITIZER ?= -fsanitize=address,undefined
+sanitize: FLAGS += $(SANITIZER)
+sanitize: LDFLAGS += $(SANITIZER)
+sanitize: debug
+
+ANALYZER ?= -fanalyzer
+ANALYZER += -Wanalyzer-too-complex
+analyze: FLAGS += $(ANALYZER)
+analyze: debug
+
 debug:
 	@echo "make $(MAKEFLAGS) got executed in debug mode..."
 debug: full
