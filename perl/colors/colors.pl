@@ -1,7 +1,6 @@
 use v5.16;
 
-my $FOREGROUND = 38;
-my $BACKGROUND = 48;
+my ($FOREGROUND, $BACKGROUND, $INITIAL, $FINAL) = (38, 48, 0, 255);
 
 my $resetdefault = "\x1b[0m";
 my $resetwithspace = "$resetdefault ";
@@ -22,10 +21,10 @@ sub color_range {
     }
 }
 
-printf("\x1b[1;37m0 to 255 Colors (FOREGROUND)%s\n", $resetdefault);
-color_range(0, 255, $FOREGROUND);
+printf("\x1b[1;37m%d to %d Colors (FOREGROUND)%s\n", $INITIAL, $FINAL, $resetdefault);
+color_range($INITIAL, $FINAL, $FOREGROUND);
 say "\n";
 
-printf("\x1b[1;37m0 to 255 Colors (BACKGROUND)%s\n", $resetdefault);
-color_range(0, 255, $BACKGROUND);
+printf("\x1b[1;37m%d to %d Colors (BACKGROUND)%s\n", $INITIAL, $FINAL, $resetdefault);
+color_range($INITIAL, $FINAL, $BACKGROUND);
 say "\n";
