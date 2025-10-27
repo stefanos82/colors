@@ -1,6 +1,8 @@
 public class Main {
     final static int FOREGROUND = 38;
     final static int BACKGROUND = 48;
+    final static int INITIAL = 0;
+    final static int FINAL = 255;
 
     static void color_range(int start, int end, int anyground) {
         String resetdefault = "\u001b[0m";
@@ -21,12 +23,12 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        System.out.println("\u001b[1;39m0 to 255 Colors (FOREGROUND)\u001b[22;0m");
-        color_range(0, 255, FOREGROUND);
+        System.out.printf("\u001b[1;39m%d to %d Colors (FOREGROUND)\u001b[22;0m\n", INITIAL, FINAL);
+        color_range(INITIAL, FINAL, FOREGROUND);
         System.out.println("\n");
 
-        System.out.println("\u001b[1;39m0 to 255 Colors (BACKGROUND)\u001b[22;0m");
-        color_range(0, 255, BACKGROUND);
+        System.out.printf("\u001b[1;39m0 to 255 Colors (BACKGROUND)\u001b[22;0m\n", INITIAL, FINAL);
+        color_range(INITIAL, FINAL, BACKGROUND);
         System.out.println("\n");
     }
 }
