@@ -1,12 +1,14 @@
 FOREGROUND = 38
 BACKGROUND = 48
+INITIAL = 0
+FINAL = 255
 
 def color_range(start, end, anyground):
     resetdefault = "\x1b[0m"
     resetwithspace = "\x1b[0m "
 
     resetoutput = resetwithspace
-    for color in range(start, end):
+    for color in range(start, end+1):
         if color % 16 == 0:
             print()
 
@@ -17,11 +19,11 @@ def color_range(start, end, anyground):
 
 
 def main():
-    print("\x1b[1;39m0 to 255 Colors (FOREGROUND)\x1b[22;0m")
-    color_range(0, 255, FOREGROUND)
+    print(f"\x1b[1;39m{INITIAL} to {FINAL} Colors (FOREGROUND)\x1b[22;0m")
+    color_range(INITIAL, FINAL, FOREGROUND)
     print("\n")
-    print("\x1b[1;39m0 to 255 Colors (BACKGROUND)\x1b[22;0m")
-    color_range(0, 255, BACKGROUND)
+    print(f"\x1b[1;39m{INITIAL} to {FINAL} Colors (BACKGROUND)\x1b[22;0m")
+    color_range(INITIAL, FINAL, BACKGROUND)
     print("\n")
 
 if __name__ == '__main__':
