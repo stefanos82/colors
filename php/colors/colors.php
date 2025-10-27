@@ -2,6 +2,8 @@
 
 const FOREGROUND = 38;
 const BACKGROUND = 48;
+const INITIAL = 0;
+const FINALE = 255;
 
 function color_range($start, $end, $anyground) {
     $resetdefault = "\x1b[0m";
@@ -22,10 +24,10 @@ function color_range($start, $end, $anyground) {
     }
 }
 
-printf("\x1b[1;39m0 to 255 Colors (FOREGROUND)\x1b[22;0m\n");
-color_range(0, 255, FOREGROUND);
+printf("\x1b[1;39m%d to %d Colors (FOREGROUND)\x1b[22;0m\n", INITIAL, FINALE);
+color_range(INITIAL, FINALE, FOREGROUND);
 printf("\n\n");
 
-printf("\x1b[1;39m0 to 255 Colors (BACKGROUND)\x1b[22;0m\n");
-color_range(0, 255, BACKGROUND);
+printf("\x1b[1;39m%d to %d Colors (BACKGROUND)\x1b[22;0m\n", INITIAL, FINALE);
+color_range(INITIAL, FINALE, BACKGROUND);
 printf("\n\n");
