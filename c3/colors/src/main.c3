@@ -1,15 +1,10 @@
 module colors;
 import std::io;
 
-const int FOREGROUND = 38;
-const int BACKGROUND = 48;
-const int INITIAL = 0;
-const int FINAL = 255;
-
 fn void color_range(int start, int end, int anyground)
 {
     String resetdefault = "\x1b[0m";
-    String resetwithspace = "\x1b[0m ";
+    String resetwithspace = String.tconcat(resetdefault, " ");
 
     String resetoutput = resetwithspace;
 
@@ -22,14 +17,19 @@ fn void color_range(int start, int end, int anyground)
     }
 }
 
-fn int main(String[] args)
+fn void main()
 {
-    io::printfn("\x1b[1;39m%d to %d Colors (FOREGROUND)\x1b[22;0m", INITIAL, FINAL);
-    color_range(INITIAL, FINAL, FOREGROUND);
+    var $fohground = 38;
+    var $bahground = 48;
+
+    var $clrBegin = 0;
+    var $clrEnd = 255;
+
+    io::printfn("\x1b[1;39m%d to %d Colors (FOREGROUND)\x1b[22;0m", $clrBegin, $clrEnd);
+    color_range($clrBegin, $clrEnd, $fohground);
     io::printn("\n");
 
-    io::printfn("\x1b[1;39m%d to %d Colors (BACKGROUND)\x1b[22;0m", INITIAL, FINAL);
-    color_range(0, 255, BACKGROUND);
+    io::printfn("\x1b[1;39m%d to %d Colors (BACKGROUND)\x1b[22;0m", $clrBegin, $clrEnd);
+    color_range($clrBegin, $clrEnd, $bahground);
     io::printn("\n");
-    return 0;
 }
