@@ -12,7 +12,7 @@ const (
 func ColorRange(start int, end int, anyground int) {
 	const (
 		resetdefault   = "\x1b[0m"
-		resetwithspace = "\x1b[0m "
+		resetwithspace = resetdefault + " "
 	)
 	resetoutput := resetwithspace
 	for color := start; color <= end; color++ {
@@ -28,11 +28,13 @@ func ColorRange(start int, end int, anyground int) {
 }
 
 func main() {
-	fmt.Printf("\x1b[1;39m%d to %d Colors (FOREGROUND)\x1b[22;0m\n", INITIAL, FINAL)
+	fmt.Printf("\x1b[1;39m%d to %d Colors (FOREGROUND)\x1b[22;0m\n",
+		INITIAL, FINAL)
 	ColorRange(INITIAL, FINAL, FOREGROUND)
 	fmt.Println("\n")
 
-	fmt.Printf("\x1b[1;39m%d to %d Colors (BACKGROUND)\x1b[22;0m\n", INITIAL, FINAL)
+	fmt.Printf("\x1b[1;39m%d to %d Colors (BACKGROUND)\x1b[22;0m\n",
+		INITIAL, FINAL)
 	ColorRange(INITIAL, FINAL, BACKGROUND)
 	fmt.Println("\n")
 }
